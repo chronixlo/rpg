@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import HealthBar from "./HealthBar";
 import "./UnitFrame.css";
-import Icon from "./Icon";
+import Icon from "../components/Icon";
 import type { Unit } from "../stores/Unit";
 
 type Props = { unit: Unit; name: string };

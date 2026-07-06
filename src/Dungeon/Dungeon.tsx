@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import playerStore from "../stores/playerStore";
 import Button from "../components/Button";
 import ItemSquare from "../components/ItemSquare";
-import UnitFrame from "../components/UnitFrame";
+import UnitFrame from "./UnitFrame";
 import { useState } from "react";
 import type { Item } from "../types";
 import ItemDialog from "../components/ItemDialog";
