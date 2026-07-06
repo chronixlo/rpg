@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="w-full max-w-lg h-full flex flex-col flex-1 border border-gray-500 m-1 md:m-5 rounded-sm">
-      <div className="flex-1">
+      <div className="flex-1 overflow-hidden flex flex-col">
         {view === "dungeon" && <Dungeon />}
         {view === "inventory" && <Inventory />}
       </div>
