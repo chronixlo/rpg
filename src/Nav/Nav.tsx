@@ -8,6 +8,7 @@ const Nav: React.FC<Props> = ({ onClick }) => {
   return (
     <div className="w-full flex justify-center items-center gap-4 border-t border-gray-500">
       <NavButton label="Dungeon" onClick={() => onClick("dungeon")} />
+      <NavButton label="Hero" onClick={() => onClick("hero")} />
       <NavButton label="Inventory" onClick={() => onClick("inventory")} />
     </div>
   );

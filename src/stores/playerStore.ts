@@ -1,8 +1,16 @@
 import { makeAutoObservable } from "mobx";
-import type { Dungeon, Item } from "../types";
+import {
+  EQUIPMENT_TYPES,
+  type Dungeon,
+  type EquipmentType,
+  type Item,
+  type ItemType,
+} from "../types";
 import { Unit } from "./Unit";
 
 const TICK_RATE = 100;
+
+let id = 0;
 
 class PlayerStore {
   player = new Unit();
@@ -39,6 +47,18 @@ class PlayerStore {
     this.dungeon = null;
   }
 
+  equipItem = (item: Item) => {
+    const oldEquipped = this.player.equipment[item.type as EquipmentType];
+    this.player.equipment[item.type as EquipmentType] = item;
+
+    const index = this.inventory.findIndex((i) => i.id === item.id);
+    this.inventory.splice(index, 1);
+
+    if (oldEquipped) {
+      this.inventory.push(oldEquipped);
+    }
+  };
+
   tick = () => {
     if (this.dungeon?.endedAt) {
       return;
@@ -57,9 +77,13 @@ class PlayerStore {
       this.dungeon.enemy.damageTaken >= this.dungeon.enemy.baseStats.hp
     ) {
       if (this.dungeon.enemy) {
-        const item = {
-          name: "Dagger",
+        const item: Item = {
+          id: Date.now() + id++,
+          name: String.fromCharCode(80 + Math.floor(Math.random() * 10)),
           stats: [{ type: "str" as const, value: this.dungeon.level }],
+          type: Object.keys(EQUIPMENT_TYPES)[
+            Math.floor(Math.random() * Object.keys(EQUIPMENT_TYPES).length)
+          ] as ItemType,
         };
         this.dungeon.loot.push(item);
       }

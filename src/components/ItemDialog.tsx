@@ -1,13 +1,20 @@
-import type { Item } from "../types";
+import { EQUIPMENT_TYPES, type EquipmentType, type Item } from "../types";
 import Button from "./Button";
 import ItemTooltip from "./ItemTooltip";
 
 type Props = {
   item: Item;
   onClose: () => void;
+  equippedItem?: Item;
+  onEquip?: (item: Item) => void;
 };
 
-const ItemDialog: React.FC<Props> = ({ item, onClose }) => {
+const ItemDialog: React.FC<Props> = ({
+  item,
+  equippedItem,
+  onClose,
+  onEquip,
+}) => {
   return (
     <div className="absolute inset-0 w-dvw h-dvh flex items-center justify-center z-30">
       <div
@@ -18,7 +25,24 @@ const ItemDialog: React.FC<Props> = ({ item, onClose }) => {
         <div className="flex flex-col gap-2">
           <ItemTooltip item={item} />
 
+          {equippedItem && (
+            <>
+              Equipped
+              <ItemTooltip item={equippedItem} />
+            </>
+          )}
+
           <div className="flex justify-end">
+            {onEquip && EQUIPMENT_TYPES[item.type as EquipmentType] && (
+              <Button
+                onClick={() => {
+                  onEquip(item);
+                  onClose();
+                }}
+              >
+                Equip
+              </Button>
+            )}
             <Button onClick={onClose}>Close</Button>
           </div>
         </div>

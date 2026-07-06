@@ -4,7 +4,7 @@ import Button from "../components/Button";
 import ItemSquare from "../components/ItemSquare";
 import UnitFrame from "./UnitFrame";
 import { useState } from "react";
-import type { Item } from "../types";
+import type { EquipmentType, Item } from "../types";
 import ItemDialog from "../components/ItemDialog";
 
 const Dungeon = observer(() => {
@@ -33,18 +33,22 @@ const Dungeon = observer(() => {
               </div>
             ))}
           </div>
-          {selectedItem && (
-            <ItemDialog
-              item={selectedItem}
-              onClose={() => setSelectedItem(null)}
-            />
-          )}
-          {(!playerStore.dungeon || playerStore.dungeon.endedAt) && (
-            <Button onClick={() => playerStore.discardDungeon()}>
-              Get loot
-            </Button>
-          )}
         </>
+      )}
+
+      {selectedItem && (
+        <ItemDialog
+          item={selectedItem}
+          equippedItem={
+            playerStore.player.equipment[selectedItem.type as EquipmentType] ||
+            undefined
+          }
+          onClose={() => setSelectedItem(null)}
+        />
+      )}
+
+      {playerStore.dungeon?.endedAt && (
+        <Button onClick={() => playerStore.discardDungeon()}>Get loot</Button>
       )}
 
       {!playerStore.dungeon && (

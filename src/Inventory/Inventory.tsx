@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import playerStore from "../stores/playerStore";
 import ItemSquare from "../components/ItemSquare";
 import { useState } from "react";
-import type { Item } from "../types";
+import type { EquipmentType, Item } from "../types";
 import ItemDialog from "../components/ItemDialog";
 
 const Inventory = observer(() => {
@@ -23,7 +23,15 @@ const Inventory = observer(() => {
         ))}
       </div>
       {selectedItem && (
-        <ItemDialog item={selectedItem} onClose={() => setSelectedItem(null)} />
+        <ItemDialog
+          item={selectedItem}
+          equippedItem={
+            playerStore.player.equipment[selectedItem.type as EquipmentType] ||
+            undefined
+          }
+          onClose={() => setSelectedItem(null)}
+          onEquip={playerStore.equipItem}
+        />
       )}
     </div>
   );

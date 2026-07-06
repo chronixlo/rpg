@@ -11,8 +11,11 @@ const ItemTooltip: React.FC<Props> = ({ item }) => {
       <div className="w-10">
         <ItemSquare item={item} onClick={() => {}} />
       </div>
-      <div>
-        <div>{item.name}</div>
+      <div className="flex-1">
+        <div className="flex justify-between">
+          <span>{item.name}</span>
+          <span>{item.type}</span>
+        </div>
         {item.stats.map((stat, idx) => (
           <span key={idx}>
             {stat.type}: {stat.value > 0 && "+"}
