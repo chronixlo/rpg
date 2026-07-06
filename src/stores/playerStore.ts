@@ -1,17 +1,11 @@
 import { makeAutoObservable } from "mobx";
-import type { Dungeon, Item, Player } from "../types";
+import type { Dungeon, Item } from "../types";
+import { Unit } from "./Unit";
 
 const TICK_RATE = 100;
 
 class PlayerStore {
-  player: Player = {
-    maxHealth: 10,
-    damageTaken: 0,
-    attackInterval: 4,
-    lastAttackFrame: 0,
-    lastReceivedHit: null,
-    stats: [],
-  };
+  player = new Unit();
 
   inventorySize = 16;
   inventory: Item[] = [];
@@ -22,12 +16,6 @@ class PlayerStore {
     makeAutoObservable(this);
 
     setInterval(this.tick, TICK_RATE);
-  }
-
-  get playerStats() {
-    return {
-      str: 3,
-    };
   }
 
   startDungeon() {
@@ -44,6 +32,10 @@ class PlayerStore {
   }
 
   discardDungeon() {
+    if (!this.dungeon) {
+      return;
+    }
+    this.inventory.push(...this.dungeon.loot);
     this.dungeon = null;
   }
 
@@ -62,25 +54,20 @@ class PlayerStore {
 
     if (
       !this.dungeon.enemy ||
-      this.dungeon.enemy.damageTaken >= this.dungeon.enemy.maxHealth
+      this.dungeon.enemy.damageTaken >= this.dungeon.enemy.baseStats.hp
     ) {
       if (this.dungeon.enemy) {
         const item = {
           name: "Dagger",
           stats: [{ type: "str" as const, value: this.dungeon.level }],
         };
-        this.inventory.push(item);
         this.dungeon.loot.push(item);
       }
 
-      this.dungeon.enemy = {
+      this.dungeon.enemy = new Unit({
         attackInterval: 5,
-        damageTaken: 0,
-        lastAttackFrame: 0,
-        maxHealth: 10,
-        stats: [{ type: "str", value: this.dungeon.level }],
-        lastReceivedHit: null,
-      };
+        baseStats: { str: this.dungeon.level, hp: 10 },
+      });
       return;
     }
 
@@ -88,7 +75,7 @@ class PlayerStore {
       this.player.lastAttackFrame + this.player.attackInterval <
       this.dungeon.frame
     ) {
-      const hit = Math.round(Math.random() * this.playerStats.str);
+      const hit = Math.round(Math.random() * this.player.resolvedStats.str);
 
       this.dungeon.enemy.damageTaken += hit;
       this.dungeon.enemy.lastReceivedHit = {
@@ -99,19 +86,19 @@ class PlayerStore {
     }
 
     if (
-      this.dungeon.enemy.damageTaken < this.dungeon.enemy.maxHealth &&
+      this.dungeon.enemy.damageTaken < this.dungeon.enemy.baseStats.hp &&
       this.dungeon.enemy.lastAttackFrame + this.dungeon.enemy.attackInterval <
         this.dungeon.frame
     ) {
-      const str = this.dungeon.enemy.stats.find((stat) => stat.type === "str");
-      const hit = Math.round(Math.random() * str!.value);
+      const str = this.dungeon.enemy.baseStats.str;
+      const hit = Math.round(Math.random() * str);
 
       this.player.damageTaken += hit;
       this.player.lastReceivedHit = { frame: this.dungeon.frame, value: hit };
       this.dungeon.enemy.lastAttackFrame = this.dungeon.frame;
     }
 
-    if (this.player.damageTaken >= this.player.maxHealth) {
+    if (this.player.damageTaken >= this.player.resolvedStats.hp) {
       this.dungeon.endedAt = Date.now();
     }
   };

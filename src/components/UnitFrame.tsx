@@ -1,8 +1,8 @@
 import { observer } from "mobx-react-lite";
-import type { Unit } from "../types";
 import HealthBar from "./HealthBar";
 import "./UnitFrame.css";
 import Icon from "./Icon";
+import type { Unit } from "../stores/Unit";
 
 type Props = { unit: Unit; name: string };
 
@@ -22,7 +22,10 @@ const UnitFrame: React.FC<Props> = observer(({ unit, name }) => {
       </div>
       <div className="flex-1">
         {name}
-        <HealthBar damageTaken={unit.damageTaken} maxHealth={unit.maxHealth} />
+        <HealthBar
+          damageTaken={unit.damageTaken}
+          maxHealth={unit.resolvedStats.hp}
+        />
       </div>
     </div>
   );

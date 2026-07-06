@@ -1,6 +1,20 @@
+import type { Unit } from "./stores/Unit";
+
+export const STAT_TYPES = {
+  str: "str",
+  hp: "hp",
+} as const;
+
+export type StatType = (typeof STAT_TYPES)[keyof typeof STAT_TYPES];
+
+export type BaseStats = {
+  str: number;
+  hp: number;
+};
+
 export type Stat = {
   value: number;
-  type: "str";
+  type: StatType;
 };
 
 export type Item = {
@@ -13,22 +27,6 @@ export type Dungeon = {
   startedAt: number;
   endedAt: number | null;
   level: number;
-  enemy: Enemy | null;
+  enemy: Unit | null;
   loot: Item[];
 };
-
-export interface Unit {
-  maxHealth: number;
-  damageTaken: number;
-  attackInterval: number;
-  lastAttackFrame: number;
-  stats: Stat[];
-  lastReceivedHit: {
-    frame: number;
-    value: number;
-  } | null;
-}
-
-export type Enemy = Unit;
-
-export type Player = Unit;
