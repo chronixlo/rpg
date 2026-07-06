@@ -3,8 +3,13 @@ import playerStore from "../stores/playerStore";
 import Button from "../components/Button";
 import ItemSquare from "../components/ItemSquare";
 import UnitFrame from "../components/UnitFrame";
+import { useState } from "react";
+import type { Item } from "../types";
+import ItemDialog from "../components/ItemDialog";
 
 const Dungeon = observer(() => {
+  const [selectedItem, setSelectedItem] = useState<Item | null>(null);
+
   return (
     <div className="flex flex-col gap-2 p-2">
       <UnitFrame unit={playerStore.player} name="Hero" />
@@ -20,9 +25,20 @@ const Dungeon = observer(() => {
           Loot
           <div className="flex gap-1">
             {playerStore.dungeon?.loot.map((item, idx) => (
-              <ItemSquare key={idx} item={item} onClick={() => {}} />
+              <div key={idx} className="w-8 h-8">
+                <ItemSquare
+                  item={item}
+                  onClick={() => setSelectedItem(item || null)}
+                />
+              </div>
             ))}
           </div>
+          {selectedItem && (
+            <ItemDialog
+              item={selectedItem}
+              onClose={() => setSelectedItem(null)}
+            />
+          )}
           {(!playerStore.dungeon || playerStore.dungeon.endedAt) && (
             <Button onClick={() => playerStore.discardDungeon()}>
               Get loot
