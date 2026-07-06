@@ -12,7 +12,7 @@ const HealthBar: React.FC<Props> = ({ damageTaken, maxHealth }) => {
         {health}/{maxHealth}
       </div>
       <div
-        className="h-full bg-green-500"
+        className="h-full bg-green-500 health-bar-inner"
         style={{
           width: (health / maxHealth) * 100 + "%",
         }}

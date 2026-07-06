@@ -1,4 +1,5 @@
 import type { Item } from "../types";
+import Icon from "./Icon";
 
 interface Props {
   onClick: (e: React.MouseEvent) => void;
@@ -7,8 +8,8 @@ interface Props {
 
 const ItemSquare: React.FC<Props> = ({ onClick, item }) => {
   return (
-    <div onClick={onClick} className="border w-10 h-10">
-      {item.name.slice(0, 1)}
+    <div onClick={onClick} className="border w-8 h-8">
+      <Icon>{item.name.slice(0, 1)}</Icon>
     </div>
   );
 };

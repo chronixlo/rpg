@@ -1,0 +1,22 @@
+@keyframes hitSplat {
+  from {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+}
+
+.hit-splat {
+  position: absolute;
+  inset: 0;
+  top: auto;
+  text-align: center;
+  animation: hitSplat 600ms forwards;
+}
+
+.health-bar-inner {
+  transition: width 100ms;
+}
