@@ -3,6 +3,7 @@ import type { Unit } from "./stores/Unit";
 export const STAT_TYPES = {
   str: "str",
   hp: "hp",
+  def: "def",
 } as const;
 
 export type StatType = (typeof STAT_TYPES)[keyof typeof STAT_TYPES];
@@ -10,6 +11,7 @@ export type StatType = (typeof STAT_TYPES)[keyof typeof STAT_TYPES];
 export type BaseStats = {
   str: number;
   hp: number;
+  def: number;
 };
 
 export type Stat = {
@@ -39,11 +41,29 @@ export const ITEM_TYPES = {
 
 export type ItemType = (typeof ITEM_TYPES)[keyof typeof ITEM_TYPES];
 
+export const RARITIES = {
+  common: "common",
+  rare: "rare",
+  epic: "epic",
+  legendary: "legendary",
+} as const;
+
+export type Rarity = (typeof RARITIES)[keyof typeof RARITIES];
+
+export const RARITY_COLORS = {
+  common: "common",
+  rare: "#12d",
+  epic: "#d3c",
+  legendary: "#dc2",
+};
+
 export type Item = {
   id: number;
   name: string;
   stats: Stat[];
   type: ItemType;
+  icon: string;
+  rarity: Rarity;
 };
 
 export type Dungeon = {

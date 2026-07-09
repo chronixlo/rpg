@@ -1,19 +1,12 @@
 import { makeAutoObservable } from "mobx";
-import {
-  EQUIPMENT_TYPES,
-  type Dungeon,
-  type EquipmentType,
-  type Item,
-  type ItemType,
-} from "../types";
+import { type Dungeon, type EquipmentType, type Item } from "../types";
 import { Unit } from "./Unit";
+import { getRandomItem } from "../itemGenerator";
 
-const TICK_RATE = 100;
-
-let id = 0;
+const TICK_RATE = 10;
 
 class PlayerStore {
-  player = new Unit();
+  player = new Unit({ name: "Hero", icon: "hero.svg" });
 
   inventorySize = 16;
   inventory: Item[] = [];
@@ -77,20 +70,15 @@ class PlayerStore {
       this.dungeon.enemy.damageTaken >= this.dungeon.enemy.baseStats.hp
     ) {
       if (this.dungeon.enemy) {
-        const item: Item = {
-          id: Date.now() + id++,
-          name: String.fromCharCode(80 + Math.floor(Math.random() * 10)),
-          stats: [{ type: "str" as const, value: this.dungeon.level }],
-          type: Object.keys(EQUIPMENT_TYPES)[
-            Math.floor(Math.random() * Object.keys(EQUIPMENT_TYPES).length)
-          ] as ItemType,
-        };
+        const item = getRandomItem(this.dungeon.level);
         this.dungeon.loot.push(item);
       }
 
       this.dungeon.enemy = new Unit({
         attackInterval: 5,
-        baseStats: { str: this.dungeon.level, hp: 10 },
+        baseStats: { str: this.dungeon.level, hp: 10, def: this.dungeon.level },
+        name: "Evil minion",
+        icon: "enemies/evil-minion.svg",
       });
       return;
     }

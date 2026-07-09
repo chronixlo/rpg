@@ -9,6 +9,7 @@ export class Unit {
   baseStats = {
     str: 1,
     hp: 10,
+    def: 1,
   };
   equipment: Equipment = {
     head: null,
@@ -17,6 +18,8 @@ export class Unit {
     boots: null,
     weapon: null,
   };
+  icon: string | null = null;
+  name: string = "";
 
   constructor(options?: Partial<Unit>) {
     makeAutoObservable(this);

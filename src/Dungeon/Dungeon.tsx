@@ -12,11 +12,11 @@ const Dungeon = observer(() => {
 
   return (
     <div className="flex flex-col gap-2 p-2">
-      <UnitFrame unit={playerStore.player} name="Hero" />
+      <UnitFrame unit={playerStore.player} />
 
       {playerStore.dungeon?.enemy ? (
         <>
-          <UnitFrame unit={playerStore.dungeon.enemy} name="Enemy" />
+          <UnitFrame unit={playerStore.dungeon.enemy} />
         </>
       ) : null}
 

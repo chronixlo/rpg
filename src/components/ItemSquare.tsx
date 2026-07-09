@@ -9,7 +9,7 @@ interface Props {
 const ItemSquare: React.FC<Props> = ({ onClick, item }) => {
   return (
     <div onClick={onClick} className="border w-full aspect-auto">
-      <Icon>{item?.name.slice(0, 1)}</Icon>
+      <Icon src={item?.icon}>{item?.name.slice(0, 1)}</Icon>
     </div>
   );
 };
