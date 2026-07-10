@@ -43,13 +43,6 @@ const itemTemplates: Record<
   },
 };
 
-const dropRates = {
-  common: 0.7,
-  rare: 0.3,
-  epic: 0.1,
-  legendary: 0.01,
-};
-
 export const getRandomItem = (level: number) => {
   const templates = Object.values(itemTemplates);
   const template = templates[Math.floor(Math.random() * templates.length)];
@@ -74,13 +67,21 @@ export const getRandomItem = (level: number) => {
     statsToAllocate -= value;
   });
 
+  const rarityRoll = Math.random();
+  const rarity =
+    rarityRoll < 0.1
+      ? RARITIES.epic
+      : rarityRoll < 0.4
+        ? RARITIES.rare
+        : RARITIES.common;
+
   const item: Item = {
     id: Date.now() + id++,
     name: String.fromCharCode(80 + Math.floor(Math.random() * 10)),
-    stats,
+    stats: stats.filter((stat) => stat.value !== 0),
     type: template.type,
     icon: template.icons[Math.floor(Math.random() * template.icons.length)],
-    rarity: RARITIES.common,
+    rarity,
   };
 
   return item;
