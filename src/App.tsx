@@ -14,7 +14,7 @@ function App() {
         {view === "hero" && <Hero />}
         {view === "inventory" && <Inventory />}
       </div>
-      <Nav onClick={(page) => setView(page)} />
+      <Nav selectedView={view} onClick={(page) => setView(page)} />
     </div>
   );
 }

@@ -32,7 +32,7 @@ const ItemDialog: React.FC<Props> = ({
             </>
           )}
 
-          <div className="flex justify-end">
+          <div className="flex justify-end gap-2">
             {onEquip && EQUIPMENT_TYPES[item.type as EquipmentType] && (
               <Button
                 onClick={() => {
