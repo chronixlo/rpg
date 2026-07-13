@@ -57,6 +57,13 @@ export const RARITY_COLORS = {
   legendary: "#dc2",
 };
 
+export const RARITY_MULTIPLIERS = {
+  common: 1,
+  rare: 1.3,
+  epic: 1.5,
+  legendary: 2,
+};
+
 export type Item = {
   id: number;
   name: string;

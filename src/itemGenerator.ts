@@ -1,5 +1,6 @@
 import {
   RARITIES,
+  RARITY_MULTIPLIERS,
   type Item,
   type ItemType,
   type Stat,
@@ -47,7 +48,15 @@ export const getRandomItem = (level: number) => {
   const templates = Object.values(itemTemplates);
   const template = templates[Math.floor(Math.random() * templates.length)];
 
-  let statsToAllocate = level;
+  const rarityRoll = Math.random();
+  const rarity =
+    rarityRoll < 0.1
+      ? RARITIES.epic
+      : rarityRoll < 0.4
+        ? RARITIES.rare
+        : RARITIES.common;
+
+  let statsToAllocate = Math.round(level * RARITY_MULTIPLIERS[rarity]);
   const stats: Stat[] = [];
 
   template.stats.forEach((stat, index, array) => {
@@ -66,14 +75,6 @@ export const getRandomItem = (level: number) => {
 
     statsToAllocate -= value;
   });
-
-  const rarityRoll = Math.random();
-  const rarity =
-    rarityRoll < 0.1
-      ? RARITIES.epic
-      : rarityRoll < 0.4
-        ? RARITIES.rare
-        : RARITIES.common;
 
   const item: Item = {
     id: Date.now() + id++,
