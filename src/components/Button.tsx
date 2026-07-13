@@ -4,7 +4,10 @@ interface Props extends React.PropsWithChildren {
 
 const Button: React.FC<Props> = ({ onClick, children }) => {
   return (
-    <button onClick={onClick} className="border px-1">
+    <button
+      onClick={onClick}
+      className="border-2 border-amber-700 bg-amber-700 px-1 rounded-sm"
+    >
       {children}
     </button>
   );

@@ -21,7 +21,7 @@ const ItemDialog: React.FC<Props> = ({
         className="absolute inset-0 w-full h-full bg-gray-500 opacity-50"
         onClick={onClose}
       />
-      <div className="w-sm h-sm bg-white p-2 rounded-sm z-1">
+      <div className="w-sm h-sm bg-stone-900 p-2 rounded-sm z-1">
         <div className="flex flex-col gap-2">
           <ItemTooltip item={item} />
 

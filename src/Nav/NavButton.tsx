@@ -5,7 +5,10 @@ type Props = {
 
 const NavButton: React.FC<Props> = ({ label, onClick }) => {
   return (
-    <button className="border p-1 w-20 h-20" onClick={onClick}>
+    <button
+      className="border-2 border-amber-700 text-amber-700 p-1 w-30 rounded-xl"
+      onClick={onClick}
+    >
       {label}
     </button>
   );

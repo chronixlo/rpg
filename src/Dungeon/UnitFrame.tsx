@@ -8,8 +8,8 @@ type Props = { unit: Unit };
 
 const UnitFrame: React.FC<Props> = observer(({ unit }) => {
   return (
-    <div className="border border-gray-500 p-2 flex gap-2">
-      <div className="relative w-20 h-20 border border-gray-500">
+    <div className="border border-amber-800 p-2 flex gap-2 bg-stone-700 rounded-xl">
+      <div className="relative w-20 h-20 border border-amber-800 rounded-xl overflow-hidden">
         <Icon src={unit.icon}>{unit.name.slice(0, 1)}</Icon>
         {unit.lastReceivedHit && (
           <span
