@@ -44,6 +44,7 @@ const Dungeon = observer(() => {
             undefined
           }
           onClose={() => setSelectedItem(null)}
+          onEquip={playerStore.equipItem}
         />
       )}
 

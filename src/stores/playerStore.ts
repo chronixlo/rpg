@@ -36,13 +36,18 @@ class PlayerStore {
     if (!this.dungeon) {
       return;
     }
-    this.inventory.push(...this.dungeon.loot);
     this.dungeon = null;
   }
 
   equipItem = (item: Item) => {
     const oldEquipped = this.player.equipment[item.type as EquipmentType];
     this.player.equipment[item.type as EquipmentType] = item;
+
+    // remove from loot if dungeon still active
+    if (this.dungeon) {
+      const lootIndex = this.dungeon.loot.findIndex((i) => i.id === item.id);
+      this.dungeon.loot.splice(lootIndex, 1);
+    }
 
     const index = this.inventory.findIndex((i) => i.id === item.id);
     this.inventory.splice(index, 1);
@@ -72,6 +77,7 @@ class PlayerStore {
       if (this.dungeon.enemy) {
         const item = getRandomItem(this.dungeon.level);
         this.dungeon.loot.push(item);
+        this.inventory.push(item);
       }
 
       this.dungeon.enemy = new Unit({
