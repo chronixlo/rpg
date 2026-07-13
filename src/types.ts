@@ -51,7 +51,7 @@ export const RARITIES = {
 export type Rarity = (typeof RARITIES)[keyof typeof RARITIES];
 
 export const RARITY_COLORS = {
-  common: "common",
+  common: "#fff",
   rare: "#12d",
   epic: "#d3c",
   legendary: "#dc2",

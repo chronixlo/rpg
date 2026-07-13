@@ -1,4 +1,4 @@
-import type { Item } from "../types";
+import { RARITY_COLORS, type Item } from "../types";
 import ItemSquare from "./ItemSquare";
 
 type Props = {
@@ -13,7 +13,7 @@ const ItemTooltip: React.FC<Props> = ({ item }) => {
       </div>
       <div className="flex-1">
         <div className="flex justify-between">
-          <span>{item.name}</span>
+          <span style={{ color: RARITY_COLORS[item.rarity] }}>{item.name}</span>
           <span>{item.type}</span>
         </div>
         {item.stats.map((stat, idx) => (
