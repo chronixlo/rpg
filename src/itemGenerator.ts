@@ -56,7 +56,7 @@ export const getRandomItem = (level: number) => {
     if (index === array.length - 1) {
       value = statsToAllocate;
     } else {
-      value = Math.floor(Math.random() * statsToAllocate);
+      value = Math.round(Math.random() * statsToAllocate);
     }
 
     stats.push({
