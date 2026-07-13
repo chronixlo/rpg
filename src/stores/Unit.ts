@@ -43,4 +43,14 @@ export class Unit {
 
     return stats;
   }
+
+  calcHit = (target: Unit) => {
+    const isSuccessfulHit = Math.random() > target.resolvedStats.def / 100;
+
+    if (!isSuccessfulHit) {
+      return 0;
+    }
+
+    return Math.round(Math.random() * this.resolvedStats.str);
+  };
 }

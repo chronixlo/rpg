@@ -87,7 +87,7 @@ class PlayerStore {
       this.player.lastAttackFrame + this.player.attackInterval <
       this.dungeon.frame
     ) {
-      const hit = Math.round(Math.random() * this.player.resolvedStats.str);
+      const hit = this.player.calcHit(this.dungeon.enemy);
 
       this.dungeon.enemy.damageTaken += hit;
       this.dungeon.enemy.lastReceivedHit = {
@@ -102,8 +102,7 @@ class PlayerStore {
       this.dungeon.enemy.lastAttackFrame + this.dungeon.enemy.attackInterval <
         this.dungeon.frame
     ) {
-      const str = this.dungeon.enemy.baseStats.str;
-      const hit = Math.round(Math.random() * str);
+      const hit = this.dungeon.enemy.calcHit(this.player);
 
       this.player.damageTaken += hit;
       this.player.lastReceivedHit = { frame: this.dungeon.frame, value: hit };
