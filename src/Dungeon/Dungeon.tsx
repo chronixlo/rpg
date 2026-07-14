@@ -11,7 +11,7 @@ const Dungeon = observer(() => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
   return (
-    <div className="flex flex-col gap-2 p-2">
+    <div className="flex flex-col gap-2 p-2 h-full overflow-auto">
       <UnitFrame unit={playerStore.player} />
 
       {playerStore.dungeon?.enemy ? (
@@ -50,17 +50,25 @@ const Dungeon = observer(() => {
         />
       )}
 
-      {playerStore.dungeon?.endedAt && (
-        <Button onClick={() => playerStore.discardDungeon()} className="h-10">
-          Exit dungeon
-        </Button>
-      )}
+      <div className="mt-auto">
+        {playerStore.dungeon?.endedAt && (
+          <Button
+            onClick={() => playerStore.discardDungeon()}
+            className="h-10 w-full"
+          >
+            Exit dungeon
+          </Button>
+        )}
 
-      {!playerStore.dungeon && (
-        <Button onClick={() => playerStore.startDungeon()} className="h-10">
-          Start dungeon
-        </Button>
-      )}
+        {!playerStore.dungeon && (
+          <Button
+            onClick={() => playerStore.startDungeon()}
+            className="h-10 w-full"
+          >
+            Start dungeon
+          </Button>
+        )}
+      </div>
     </div>
   );
 });

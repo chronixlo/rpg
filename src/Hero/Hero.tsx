@@ -14,7 +14,7 @@ const Hero = observer(() => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
 
   return (
-    <div className="flex-1 flex flex-col gap-2 overflow-hidden p-2">
+    <div className="flex-1 flex flex-col gap-2 overflow-auto p-2">
       <div className="flex justify-center gap-2">
         {Object.keys(playerStore.player.resolvedStats).map((stat) => (
           <div

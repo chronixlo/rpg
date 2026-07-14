@@ -8,7 +8,7 @@ function App() {
   const [view, setView] = useState("dungeon");
 
   return (
-    <div className="w-full max-w-lg h-full flex flex-col flex-1 border-2 border-amber-800 m-1 md:m-5 rounded-sm bg-linear-to-b from-stone-900 to-stone-800 text-white">
+    <div className="w-full max-w-lg h-full flex flex-col flex-1 border-2 border-amber-800 rounded-sm bg-linear-to-b from-stone-900 to-stone-800 text-white">
       <div className="flex-1 overflow-hidden flex flex-col">
         {view === "dungeon" && <Dungeon />}
         {view === "hero" && <Hero />}
