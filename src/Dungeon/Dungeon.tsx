@@ -51,7 +51,9 @@ const Dungeon = observer(() => {
       )}
 
       {playerStore.dungeon?.endedAt && (
-        <Button onClick={() => playerStore.discardDungeon()}>Get loot</Button>
+        <Button onClick={() => playerStore.discardDungeon()}>
+          Exit dungeon
+        </Button>
       )}
 
       {!playerStore.dungeon && (

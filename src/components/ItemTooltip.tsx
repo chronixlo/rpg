@@ -7,8 +7,8 @@ type Props = {
 
 const ItemTooltip: React.FC<Props> = ({ item }) => {
   return (
-    <div className="h-20 border border-amber-800 rounded-sm flex gap-2 p-2">
-      <div className="w-10">
+    <div className="border border-amber-800 rounded-sm flex gap-2 p-2">
+      <div className="w-16">
         <ItemSquare item={item} onClick={() => {}} />
       </div>
       <div className="flex-1">

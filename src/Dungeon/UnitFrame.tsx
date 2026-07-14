@@ -21,7 +21,7 @@ const UnitFrame: React.FC<Props> = observer(({ unit }) => {
         )}
       </div>
       <div className="flex-1 flex flex-col">
-        {unit.name}
+        <span className="text-lg">{unit.name}</span>
         <HealthBar
           damageTaken={unit.damageTaken}
           maxHealth={unit.resolvedStats.hp}
