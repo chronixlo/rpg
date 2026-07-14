@@ -29,6 +29,9 @@ const Dungeon = observer(() => {
                 <ItemSquare
                   item={item}
                   onClick={() => setSelectedItem(item || null)}
+                  equippedItem={
+                    playerStore.player.equipment[item.type as EquipmentType]
+                  }
                 />
               </div>
             ))}
@@ -40,8 +43,7 @@ const Dungeon = observer(() => {
         <ItemDialog
           item={selectedItem}
           equippedItem={
-            playerStore.player.equipment[selectedItem.type as EquipmentType] ||
-            undefined
+            playerStore.player.equipment[selectedItem.type as EquipmentType]
           }
           onClose={() => setSelectedItem(null)}
           onEquip={playerStore.equipItem}

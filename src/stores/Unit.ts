@@ -14,6 +14,7 @@ export class Unit {
   equipment: Equipment = {
     head: {
       id: -1,
+      level: 0,
       name: "Rusty Helmet",
       stats: [],
       type: "head",
@@ -22,6 +23,7 @@ export class Unit {
     },
     chest: {
       id: -2,
+      level: 0,
       name: "Tattered Tunic",
       stats: [],
       type: "chest",
@@ -30,6 +32,7 @@ export class Unit {
     },
     gloves: {
       id: -3,
+      level: 0,
       name: "Worn Gloves",
       stats: [],
       type: "gloves",
@@ -38,6 +41,7 @@ export class Unit {
     },
     boots: {
       id: -4,
+      level: 0,
       name: "Old Boots",
       stats: [],
       type: "boots",
@@ -46,6 +50,7 @@ export class Unit {
     },
     weapon: {
       id: -5,
+      level: 0,
       name: "Rusty Dagger",
       stats: [],
       type: "weapon",

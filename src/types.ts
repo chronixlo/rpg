@@ -69,6 +69,7 @@ export const RARITY_MULTIPLIERS = {
 
 export type Item = {
   id: number;
+  level: number;
   name: string;
   stats: Stat[];
   type: ItemType;

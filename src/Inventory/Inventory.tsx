@@ -18,6 +18,12 @@ const Inventory = observer(() => {
               onClick={() =>
                 setSelectedItem(playerStore.inventory[idx] || null)
               }
+              equippedItem={
+                playerStore.inventory[idx] &&
+                playerStore.player.equipment[
+                  playerStore.inventory[idx].type as EquipmentType
+                ]
+              }
             />
           </div>
         ))}
@@ -26,8 +32,7 @@ const Inventory = observer(() => {
         <ItemDialog
           item={selectedItem}
           equippedItem={
-            playerStore.player.equipment[selectedItem.type as EquipmentType] ||
-            undefined
+            playerStore.player.equipment[selectedItem.type as EquipmentType]
           }
           onClose={() => setSelectedItem(null)}
           onEquip={playerStore.equipItem}

@@ -58,7 +58,8 @@ export const getRandomItem = (level: number) => {
           ? RARITIES.uncommon
           : RARITIES.common;
 
-  let statsToAllocate = Math.round(level * RARITY_MULTIPLIERS[rarity]);
+  const itemLevel = Math.round(level * RARITY_MULTIPLIERS[rarity]);
+  let statsToAllocate = itemLevel;
   const stats: Stat[] = [];
 
   template.stats.forEach((stat, index, array) => {
@@ -80,6 +81,7 @@ export const getRandomItem = (level: number) => {
 
   const item: Item = {
     id: Date.now() + id++,
+    level: itemLevel,
     name: String.fromCharCode(80 + Math.floor(Math.random() * 10)),
     stats: stats.filter((stat) => stat.value !== 0),
     type: template.type,
