@@ -20,10 +20,12 @@ const Hero = observer(() => {
         {Object.keys(playerStore.player.resolvedStats).map((stat) => (
           <div
             key={stat}
-            className="w-30 p-4 border-2 border-amber-800 rounded-lg flex flex-col text-center"
+            className="w-30 border-2 border-amber-800 rounded-lg flex flex-col text-center"
           >
-            <div>{STAT_LABELS[stat as StatType]}</div>
-            <div className="text-3xl">
+            <div className="bg-amber-800 p-1">
+              {STAT_LABELS[stat as StatType]}
+            </div>
+            <div className="text-3xl p-2">
               {playerStore.player.resolvedStats[stat as StatType]}
             </div>
           </div>
