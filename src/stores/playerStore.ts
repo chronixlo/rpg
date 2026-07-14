@@ -2,6 +2,7 @@ import { makeAutoObservable } from "mobx";
 import { type Dungeon, type EquipmentType, type Item } from "../types";
 import { Unit } from "./Unit";
 import { getRandomItem } from "../itemGenerator";
+import { LEATHER, STEEL } from "../staticItems";
 
 const TICK_RATE = 10;
 
@@ -54,6 +55,26 @@ class PlayerStore {
 
     if (oldEquipped) {
       this.inventory.push(oldEquipped);
+    }
+  };
+
+  salvageItem = (item: Item) => {
+    // remove from loot if dungeon still active
+    if (this.dungeon) {
+      const lootIndex = this.dungeon.loot.findIndex((i) => i.id === item.id);
+      this.dungeon.loot.splice(lootIndex, 1);
+    }
+
+    const index = this.inventory.findIndex((i) => i.id === item.id);
+    this.inventory.splice(index, 1);
+
+    const material: Item = item.type === "weapon" ? STEEL : LEATHER;
+
+    const materialIndex = this.inventory.findIndex((i) => i.id === material.id);
+    if (materialIndex === -1) {
+      this.inventory.push(material);
+    } else {
+      this.inventory[materialIndex].count! += 1;
     }
   };
 

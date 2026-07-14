@@ -20,14 +20,26 @@ const ItemSquare: React.FC<Props> = ({ onClick, item, equippedItem }) => {
       }}
     >
       <Icon src={item?.icon}>{item?.name.slice(0, 1)}</Icon>
-      <div className="absolute bottom-0 right-0 p-0.5 bg-black leading-none text-xs">
-        {item?.level}
-      </div>
-      {item && equippedItem && item.level > equippedItem.level && (
-        <div className="absolute top-0 right-0 p-0.5 bg-black leading-none text-lg font-extrabold">
-          ↑
+
+      {item?.level != null && (
+        <div className="absolute bottom-0 right-0 p-0.5 bg-black leading-none text-xs">
+          {item.level}
         </div>
       )}
+
+      {item?.count != null && (
+        <div className="absolute bottom-0 left-0 p-0.5 bg-black leading-none text-xs">
+          {item.count}
+        </div>
+      )}
+
+      {item?.level != null &&
+        equippedItem?.level != null &&
+        item.level > equippedItem.level && (
+          <div className="absolute top-0 right-0 p-0.5 bg-black leading-none text-lg font-extrabold">
+            ↑
+          </div>
+        )}
     </div>
   );
 };

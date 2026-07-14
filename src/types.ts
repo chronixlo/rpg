@@ -69,12 +69,13 @@ export const RARITY_MULTIPLIERS = {
 
 export type Item = {
   id: number;
-  level: number;
+  level?: number;
   name: string;
   stats: Stat[];
   type: ItemType;
   icon: string;
   rarity: Rarity;
+  count?: number;
 };
 
 export type Dungeon = {
