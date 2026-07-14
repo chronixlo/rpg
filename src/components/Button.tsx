@@ -1,4 +1,4 @@
-import cls from "../utils/cls";
+import { cls } from "../utils";
 
 interface Props extends React.PropsWithChildren {
   onClick: (e: React.MouseEvent) => void;
