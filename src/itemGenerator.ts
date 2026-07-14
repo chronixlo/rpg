@@ -1,3 +1,4 @@
+import { itemAdjectives } from "./adjectives";
 import {
   RARITIES,
   RARITY_MULTIPLIERS,
@@ -9,59 +10,6 @@ import {
 import { randomFromArray } from "./utils";
 
 let id = 1;
-
-const itemAdjectives = [
-  "Formidable",
-  "Ancient",
-  "Cursed",
-  "Blessed",
-  "Radiant",
-  "Shattered",
-  "Ethereal",
-  "Savage",
-  "Pristine",
-  "Corrupted",
-  "Gleaming",
-  "Venomous",
-  "Molten",
-  "Frozen",
-  "Runic",
-  "Forsaken",
-  "Vengeful",
-  "Hallowed",
-  "Tarnished",
-  "Enchanted",
-  "Brutal",
-  "Ornate",
-  "Dreadful",
-  "Celestial",
-  "Infernal",
-  "Weathered",
-  "Gilded",
-  "Shadowed",
-  "Volatile",
-  "Sacred",
-  "Wretched",
-  "Piercing",
-  "Resilient",
-  "Spectral",
-  "Tempered",
-  "Rusted",
-  "Arcane",
-  "Feral",
-  "Immaculate",
-  "Doomed",
-  "Sundered",
-  "Glorious",
-  "Malevolent",
-  "Serrated",
-  "Tranquil",
-  "Rugged",
-  "Timeworn",
-  "Blazing",
-  "Frostbitten",
-  "Unyielding",
-];
 
 const itemTemplates: Record<
   string,
@@ -143,7 +91,9 @@ export const getRandomItem = (level: number) => {
     id: Date.now() + id++,
     level: itemLevel,
     name:
-      randomFromArray(itemAdjectives) + " " + randomFromArray(template.names),
+      randomFromArray(itemAdjectives[rarity]) +
+      " " +
+      randomFromArray(template.names),
     stats: stats.filter((stat) => stat.value !== 0),
     type: template.type,
     icon: randomFromArray(template.icons),
