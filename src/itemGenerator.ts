@@ -9,36 +9,95 @@ import {
 
 let id = 1;
 
+const itemAdjectives = [
+  "Formidable",
+  "Ancient",
+  "Cursed",
+  "Blessed",
+  "Radiant",
+  "Shattered",
+  "Ethereal",
+  "Savage",
+  "Pristine",
+  "Corrupted",
+  "Gleaming",
+  "Venomous",
+  "Molten",
+  "Frozen",
+  "Runic",
+  "Forsaken",
+  "Vengeful",
+  "Hallowed",
+  "Tarnished",
+  "Enchanted",
+  "Brutal",
+  "Ornate",
+  "Dreadful",
+  "Celestial",
+  "Infernal",
+  "Weathered",
+  "Gilded",
+  "Shadowed",
+  "Volatile",
+  "Sacred",
+  "Wretched",
+  "Piercing",
+  "Resilient",
+  "Spectral",
+  "Tempered",
+  "Rusted",
+  "Arcane",
+  "Feral",
+  "Immaculate",
+  "Doomed",
+  "Sundered",
+  "Glorious",
+  "Malevolent",
+  "Serrated",
+  "Tranquil",
+  "Rugged",
+  "Timeworn",
+  "Blazing",
+  "Frostbitten",
+  "Unyielding",
+];
+
 const itemTemplates: Record<
   string,
   {
     type: ItemType;
+    names: string[];
     icons: string[];
     stats: StatType[];
   }
 > = {
   dagger: {
     type: "weapon",
+    names: ["Dagger", "Knife", "Blade"],
     icons: ["items/weapon/sacrificial-dagger.svg"],
     stats: ["str"],
   },
   head: {
     type: "head",
+    names: ["Helmet", "Barbute"],
     icons: ["items/head/closed-barbute.svg"],
     stats: ["hp", "def"],
   },
   chest: {
     type: "chest",
+    names: ["Chestplate", "Cuirass"],
     icons: ["items/chest/shoulder-armor.svg"],
     stats: ["hp", "def"],
   },
   gloves: {
     type: "gloves",
+    names: ["Gauntlets", "Gloves"],
     icons: ["items/gloves/mailed-fist.svg"],
     stats: ["hp", "def"],
   },
   boots: {
     type: "boots",
+    names: ["Boots", "Sabatons"],
     icons: ["items/boots/metal-boot.svg"],
     stats: ["hp", "def"],
   },
@@ -82,7 +141,10 @@ export const getRandomItem = (level: number) => {
   const item: Item = {
     id: Date.now() + id++,
     level: itemLevel,
-    name: String.fromCharCode(80 + Math.floor(Math.random() * 10)),
+    name:
+      itemAdjectives[Math.floor(Math.random() * itemAdjectives.length)] +
+      " " +
+      template.names[Math.floor(Math.random() * template.names.length)],
     stats: stats.filter((stat) => stat.value !== 0),
     type: template.type,
     icon: template.icons[Math.floor(Math.random() * template.icons.length)],
