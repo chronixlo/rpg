@@ -31,7 +31,7 @@ export type EquipmentType =
   (typeof EQUIPMENT_TYPES)[keyof typeof EQUIPMENT_TYPES];
 
 export type Equipment = {
-  [K in EquipmentType]: Item | null;
+  [K in EquipmentType]: Item;
 };
 
 export const ITEM_TYPES = {
@@ -43,6 +43,7 @@ export type ItemType = (typeof ITEM_TYPES)[keyof typeof ITEM_TYPES];
 
 export const RARITIES = {
   common: "common",
+  uncommon: "uncommon",
   rare: "rare",
   epic: "epic",
   legendary: "legendary",
@@ -52,13 +53,15 @@ export type Rarity = (typeof RARITIES)[keyof typeof RARITIES];
 
 export const RARITY_COLORS = {
   common: "#fff",
+  uncommon: "#2d3",
   rare: "#12d",
   epic: "#d3c",
   legendary: "#dc2",
 };
 
 export const RARITY_MULTIPLIERS = {
-  common: 1,
+  common: 0,
+  uncommon: 1,
   rare: 1.3,
   epic: 1.5,
   legendary: 2,

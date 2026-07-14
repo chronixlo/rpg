@@ -12,11 +12,46 @@ export class Unit {
     def: 1,
   };
   equipment: Equipment = {
-    head: null,
-    chest: null,
-    gloves: null,
-    boots: null,
-    weapon: null,
+    head: {
+      id: -1,
+      name: "Rusty Helmet",
+      stats: [],
+      type: "head",
+      icon: "items/head/closed-barbute.svg",
+      rarity: "common",
+    },
+    chest: {
+      id: -2,
+      name: "Tattered Tunic",
+      stats: [],
+      type: "chest",
+      icon: "items/chest/shoulder-armor.svg",
+      rarity: "common",
+    },
+    gloves: {
+      id: -3,
+      name: "Worn Gloves",
+      stats: [],
+      type: "gloves",
+      icon: "items/gloves/mailed-fist.svg",
+      rarity: "common",
+    },
+    boots: {
+      id: -4,
+      name: "Old Boots",
+      stats: [],
+      type: "boots",
+      icon: "items/boots/metal-boot.svg",
+      rarity: "common",
+    },
+    weapon: {
+      id: -5,
+      name: "Rusty Dagger",
+      stats: [],
+      type: "weapon",
+      icon: "items/weapon/sacrificial-dagger.svg",
+      rarity: "common",
+    },
   };
   icon: string | null = null;
   name: string = "";

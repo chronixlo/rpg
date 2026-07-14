@@ -25,6 +25,7 @@ const Nav: React.FC<Props> = ({ selectedView, onClick }) => {
     <div className="w-full flex justify-center items-center gap-4 p-2 border-t border-amber-800">
       {PAGES.map(({ label, value }) => (
         <NavButton
+          key={value}
           label={label}
           selected={selectedView === value}
           onClick={() => onClick(value)}

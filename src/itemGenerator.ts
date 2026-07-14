@@ -52,9 +52,11 @@ export const getRandomItem = (level: number) => {
   const rarity =
     rarityRoll < 0.1
       ? RARITIES.epic
-      : rarityRoll < 0.4
+      : rarityRoll < 0.3
         ? RARITIES.rare
-        : RARITIES.common;
+        : rarityRoll < 0.6
+          ? RARITIES.uncommon
+          : RARITIES.common;
 
   let statsToAllocate = Math.round(level * RARITY_MULTIPLIERS[rarity]);
   const stats: Stat[] = [];
