@@ -115,7 +115,10 @@ class PlayerStore {
       this.dungeon.enemy.lastAttackFrame = this.dungeon.frame;
     }
 
-    if (this.player.damageTaken >= this.player.resolvedStats.hp) {
+    if (
+      this.player.damageTaken >= this.player.resolvedStats.hp ||
+      this.inventory.length >= this.inventorySize
+    ) {
       this.dungeon.endedAt = Date.now();
     }
   };

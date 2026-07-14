@@ -60,14 +60,17 @@ const Dungeon = observer(() => {
           </Button>
         )}
 
-        {!playerStore.dungeon && (
-          <Button
-            onClick={() => playerStore.startDungeon()}
-            className="h-10 w-full"
-          >
-            Start dungeon
-          </Button>
-        )}
+        {!playerStore.dungeon &&
+          (playerStore.inventory.length < playerStore.inventorySize ? (
+            <Button
+              onClick={() => playerStore.startDungeon()}
+              className="h-10 w-full"
+            >
+              Start dungeon
+            </Button>
+          ) : (
+            <div className="text-center">Inventory is full!</div>
+          ))}
       </div>
     </div>
   );
