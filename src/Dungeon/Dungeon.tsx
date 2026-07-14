@@ -25,7 +25,7 @@ const Dungeon = observer(() => {
           Loot
           <div className="flex gap-1">
             {playerStore.dungeon?.loot.map((item, idx) => (
-              <div key={idx} className="w-8 h-8">
+              <div key={idx} className="w-20 h-20">
                 <ItemSquare
                   item={item}
                   onClick={() => setSelectedItem(item || null)}
