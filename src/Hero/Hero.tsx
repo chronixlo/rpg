@@ -3,6 +3,7 @@ import playerStore from "../stores/playerStore";
 import { useState } from "react";
 import {
   EQUIPMENT_TYPES,
+  STAT_LABELS,
   type EquipmentType,
   type Item,
   type StatType,
@@ -21,7 +22,7 @@ const Hero = observer(() => {
             key={stat}
             className="w-30 p-4 border-2 border-amber-800 rounded-lg flex flex-col text-center"
           >
-            <div>{stat}</div>
+            <div>{STAT_LABELS[stat as StatType]}</div>
             <div className="text-3xl">
               {playerStore.player.resolvedStats[stat as StatType]}
             </div>

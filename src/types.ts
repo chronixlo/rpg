@@ -8,6 +8,12 @@ export const STAT_TYPES = {
 
 export type StatType = (typeof STAT_TYPES)[keyof typeof STAT_TYPES];
 
+export const STAT_LABELS: Record<StatType, string> = {
+  str: "Strength",
+  hp: "Hitpoints",
+  def: "Defense",
+};
+
 export type BaseStats = {
   str: number;
   hp: number;
