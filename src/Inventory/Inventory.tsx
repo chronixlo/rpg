@@ -4,6 +4,7 @@ import ItemSquare from "../components/ItemSquare";
 import { useState } from "react";
 import type { EquipmentType, Item } from "../types";
 import ItemDialog from "../components/ItemDialog";
+import Button from "../components/Button";
 
 const Inventory = observer(() => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
@@ -28,6 +29,20 @@ const Inventory = observer(() => {
           </div>
         ))}
       </div>
+
+      <div className="p-2 border-t-2 border-amber-800 flex justify-end">
+        <Button
+          onClick={() => {
+            const salvageables = playerStore.inventory.filter(
+              (i) => i.type !== "material",
+            );
+            salvageables.forEach((i) => playerStore.salvageItem(i));
+          }}
+        >
+          Salvage all
+        </Button>
+      </div>
+
       {selectedItem && (
         <ItemDialog
           item={selectedItem}

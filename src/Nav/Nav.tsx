@@ -22,7 +22,7 @@ type Props = {
 
 const Nav: React.FC<Props> = ({ selectedView, onClick }) => {
   return (
-    <div className="w-full flex justify-center items-center gap-4 p-2 border-t border-amber-800">
+    <div className="w-full flex justify-center items-center gap-4 p-2 border-t-2 border-amber-800">
       {PAGES.map(({ label, value }) => (
         <NavButton
           key={value}
