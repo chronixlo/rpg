@@ -6,6 +6,7 @@ import {
   type Stat,
   type StatType,
 } from "./types";
+import { randomFromArray } from "./utils";
 
 let id = 1;
 
@@ -105,7 +106,7 @@ const itemTemplates: Record<
 
 export const getRandomItem = (level: number) => {
   const templates = Object.values(itemTemplates);
-  const template = templates[Math.floor(Math.random() * templates.length)];
+  const template = randomFromArray(templates);
 
   const rarityRoll = Math.random();
   const rarity =
@@ -142,12 +143,10 @@ export const getRandomItem = (level: number) => {
     id: Date.now() + id++,
     level: itemLevel,
     name:
-      itemAdjectives[Math.floor(Math.random() * itemAdjectives.length)] +
-      " " +
-      template.names[Math.floor(Math.random() * template.names.length)],
+      randomFromArray(itemAdjectives) + " " + randomFromArray(template.names),
     stats: stats.filter((stat) => stat.value !== 0),
     type: template.type,
-    icon: template.icons[Math.floor(Math.random() * template.icons.length)],
+    icon: randomFromArray(template.icons),
     rarity,
   };
 
