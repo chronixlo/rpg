@@ -51,13 +51,13 @@ const Dungeon = observer(() => {
       )}
 
       {playerStore.dungeon?.endedAt && (
-        <Button onClick={() => playerStore.discardDungeon()}>
+        <Button onClick={() => playerStore.discardDungeon()} className="h-10">
           Exit dungeon
         </Button>
       )}
 
       {!playerStore.dungeon && (
-        <Button onClick={() => playerStore.startDungeon()}>
+        <Button onClick={() => playerStore.startDungeon()} className="h-10">
           Start dungeon
         </Button>
       )}

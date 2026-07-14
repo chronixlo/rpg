@@ -43,7 +43,9 @@ const ItemDialog: React.FC<Props> = ({
                 Equip
               </Button>
             )}
-            <Button onClick={onClose}>Close</Button>
+            <Button onClick={onClose} type="outline">
+              Close
+            </Button>
           </div>
         </div>
       </div>

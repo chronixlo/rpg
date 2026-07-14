@@ -1,12 +1,25 @@
+import cls from "../utils/cls";
+
 interface Props extends React.PropsWithChildren {
   onClick: (e: React.MouseEvent) => void;
+  className?: string;
+  type?: "default" | "outline";
 }
 
-const Button: React.FC<Props> = ({ onClick, children }) => {
+const Button: React.FC<Props> = ({
+  onClick,
+  children,
+  className,
+  type = "default",
+}) => {
   return (
     <button
       onClick={onClick}
-      className="border-2 border-amber-700 bg-amber-700 px-1 rounded-sm"
+      className={cls([
+        "border-2 border-amber-700 text-amber-700 px-1 rounded-sm",
+        type === "default" && "bg-amber-700 text-white",
+        className,
+      ])}
     >
       {children}
     </button>
