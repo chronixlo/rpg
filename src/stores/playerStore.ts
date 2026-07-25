@@ -1,10 +1,11 @@
-import { makeAutoObservable } from "mobx";
+import { autorun, makeAutoObservable, toJS } from "mobx";
 import { type Dungeon, type EquipmentType, type Item } from "../types";
 import { Unit } from "./Unit";
 import { getRandomItem } from "../itemGenerator";
 import { LEATHER, STEEL } from "../staticItems";
 
 const TICK_RATE = 10;
+const STORAGE_KEY = "rpg-save";
 
 class PlayerStore {
   player = new Unit({ name: "Hero", icon: "hero.svg" });
@@ -18,8 +19,43 @@ class PlayerStore {
   constructor() {
     makeAutoObservable(this);
 
+    this.load();
+    this.persist();
     setInterval(this.tick, TICK_RATE);
   }
+
+  private load = () => {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) {
+      return;
+    }
+    try {
+      const data = JSON.parse(raw);
+      this.player = new Unit(data.player);
+      this.inventory = data.inventory ?? [];
+      this.level = data.level ?? 1;
+    } catch {
+      this.player = new Unit({ name: "Hero", icon: "hero.svg" });
+      this.inventory = [];
+      this.level = 1;
+    }
+  };
+
+  private persist = () => {
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    autorun(() => {
+      const data = {
+        player: toJS(this.player),
+        inventory: toJS(this.inventory),
+        level: this.level,
+      };
+      // combat mutates the player every tick, so debounce the writes
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+      }, 500);
+    });
+  };
 
   setLevel = (level: number) => {
     this.level = level;
