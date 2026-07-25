@@ -20,7 +20,7 @@ class PlayerStore {
     setInterval(this.tick, TICK_RATE);
   }
 
-  startDungeon() {
+  startDungeon(level: number) {
     this.player.lastAttackFrame = 0;
 
     this.dungeon = {
@@ -28,7 +28,7 @@ class PlayerStore {
       startedAt: Date.now(),
       endedAt: null,
       enemy: null,
-      level: 1,
+      level,
       loot: [],
     };
   }

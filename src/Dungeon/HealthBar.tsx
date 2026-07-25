@@ -4,7 +4,7 @@ type Props = {
 };
 
 const HealthBar: React.FC<Props> = ({ damageTaken, maxHealth }) => {
-  const health = maxHealth - damageTaken;
+  const health = Math.max(0, maxHealth - damageTaken);
 
   return (
     <div className="flex-1 h-4 relative border-4 border-green-700 rounded-xl overflow-hidden">
