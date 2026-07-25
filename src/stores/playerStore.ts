@@ -4,7 +4,7 @@ import { Unit } from "./Unit";
 import { getRandomItem } from "../itemGenerator";
 import { LEATHER, STEEL } from "../staticItems";
 
-const TICK_RATE = 10;
+const TICK_RATE = 50;
 const STORAGE_KEY = "rpg-save";
 
 class PlayerStore {
