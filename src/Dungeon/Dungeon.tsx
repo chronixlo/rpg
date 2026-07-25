@@ -9,7 +9,6 @@ import ItemDialog from "../components/ItemDialog";
 
 const Dungeon = observer(() => {
   const [selectedItem, setSelectedItem] = useState<Item | null>(null);
-  const [level, setLevel] = useState(1);
 
   return (
     <div className="flex flex-col gap-2 p-2 h-full overflow-auto">
@@ -67,22 +66,23 @@ const Dungeon = observer(() => {
               Level
               <div className="flex mb-2 mt-0.5 justify-center items-center">
                 <Button
-                  onClick={() =>
-                    setLevel((l) => {
-                      if (l > 1) {
-                        return l - 1;
-                      }
-                      return l;
-                    })
-                  }
+                  onClick={() => {
+                    if (playerStore.level > 1) {
+                      playerStore.setLevel(playerStore.level - 1);
+                    }
+                  }}
                 >
                   &lt;
                 </Button>
-                <div className="w-10 text-center">{level}</div>
-                <Button onClick={() => setLevel((l) => l + 1)}>&gt;</Button>
+                <div className="w-10 text-center">{playerStore.level}</div>
+                <Button
+                  onClick={() => playerStore.setLevel(playerStore.level + 1)}
+                >
+                  &gt;
+                </Button>
               </div>
               <Button
-                onClick={() => playerStore.startDungeon(level)}
+                onClick={() => playerStore.startDungeon()}
                 className="h-10 w-full"
               >
                 Start dungeon

@@ -13,6 +13,7 @@ class PlayerStore {
   inventory: Item[] = [];
 
   dungeon: Dungeon | null = null;
+  level = 1;
 
   constructor() {
     makeAutoObservable(this);
@@ -20,7 +21,11 @@ class PlayerStore {
     setInterval(this.tick, TICK_RATE);
   }
 
-  startDungeon(level: number) {
+  setLevel = (level: number) => {
+    this.level = level;
+  };
+
+  startDungeon() {
     this.player.lastAttackFrame = 0;
 
     this.dungeon = {
@@ -28,7 +33,7 @@ class PlayerStore {
       startedAt: Date.now(),
       endedAt: null,
       enemy: null,
-      level,
+      level: this.level,
       loot: [],
     };
   }
