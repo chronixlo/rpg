@@ -148,16 +148,19 @@ class PlayerStore {
         this.inventory.push(item);
       }
 
+      // base stats are 1 10 1
       const stats = distributeStats(
-        ["def", "hp", "str"],
-        this.dungeon.level * 2,
+        ["str", "hp", "def"],
+        (this.dungeon.level - 1) * 4,
       );
       const baseStats = stats.reduce(
         (prev, next) => ({ ...prev, [next.type]: next.value }),
         {},
       ) as BaseStats;
 
+      baseStats.str += 1;
       baseStats.hp += 10;
+      baseStats.def += 1;
 
       this.dungeon.enemy = new Unit({
         attackInterval: 5,
