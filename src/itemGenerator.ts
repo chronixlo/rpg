@@ -4,10 +4,9 @@ import {
   RARITY_MULTIPLIERS,
   type Item,
   type ItemType,
-  type Stat,
   type StatType,
 } from "./types";
-import { randomFromArray } from "./utils";
+import { distributeStats, randomFromArray } from "./utils";
 
 let id = 1;
 
@@ -67,25 +66,8 @@ export const getRandomItem = (level: number) => {
           : RARITIES.common;
 
   const itemLevel = Math.round(level * RARITY_MULTIPLIERS[rarity]);
-  let statsToAllocate = itemLevel;
-  const stats: Stat[] = [];
 
-  template.stats.forEach((stat, index, array) => {
-    let value;
-
-    if (index === array.length - 1) {
-      value = statsToAllocate;
-    } else {
-      value = Math.round(Math.random() * statsToAllocate);
-    }
-
-    stats.push({
-      type: stat,
-      value,
-    });
-
-    statsToAllocate -= value;
-  });
+  const stats = distributeStats(template.stats, itemLevel);
 
   const item: Item = {
     id: Date.now() + id++,
