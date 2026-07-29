@@ -23,7 +23,7 @@ const Dungeon = observer(() => {
       {playerStore.dungeon && playerStore.dungeon?.loot.length !== 0 && (
         <>
           Loot
-          <div className="flex gap-1">
+          <div className="flex gap-1 flex-wrap">
             {playerStore.dungeon?.loot.map((item, idx) => (
               <div key={idx} className="w-20 h-20">
                 <ItemSquare
