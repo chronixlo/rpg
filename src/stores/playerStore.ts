@@ -1,8 +1,14 @@
 import { autorun, makeAutoObservable, toJS } from "mobx";
-import { type Dungeon, type EquipmentType, type Item } from "../types";
+import {
+  type BaseStats,
+  type Dungeon,
+  type EquipmentType,
+  type Item,
+} from "../types";
 import { Unit } from "./Unit";
 import { getRandomItem } from "../itemGenerator";
 import { LEATHER, STEEL } from "../staticItems";
+import { distributeStats } from "../utils";
 
 const TICK_RATE = 50;
 const STORAGE_KEY = "rpg-save";
@@ -142,9 +148,20 @@ class PlayerStore {
         this.inventory.push(item);
       }
 
+      const stats = distributeStats(
+        ["def", "hp", "str"],
+        this.dungeon.level * 2,
+      );
+      const baseStats = stats.reduce(
+        (prev, next) => ({ ...prev, [next.type]: next.value }),
+        {},
+      ) as BaseStats;
+
+      baseStats.hp += 10;
+
       this.dungeon.enemy = new Unit({
         attackInterval: 5,
-        baseStats: { str: this.dungeon.level, hp: 10, def: this.dungeon.level },
+        baseStats,
         name: "Evil minion",
         icon: "enemies/evil-minion.svg",
       });
