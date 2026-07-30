@@ -51,10 +51,20 @@ const Dungeon = observer(() => {
       )}
 
       <div className="mt-auto">
+        {playerStore.dungeon && !playerStore.dungeon.endedAt && (
+          <Button
+            onClick={() => playerStore.endDungeon()}
+            type="outline"
+            className="w-full h-16"
+          >
+            End dungeon
+          </Button>
+        )}
+
         {playerStore.dungeon?.endedAt && (
           <Button
             onClick={() => playerStore.discardDungeon()}
-            className="h-10 w-full"
+            className="w-full h-16"
           >
             Exit dungeon
           </Button>
@@ -66,6 +76,7 @@ const Dungeon = observer(() => {
               Level
               <div className="flex mb-2 mt-0.5 justify-center items-center">
                 <Button
+                  className="w-10"
                   onClick={() => {
                     if (playerStore.level > 1) {
                       playerStore.setLevel(playerStore.level - 1);
@@ -76,6 +87,7 @@ const Dungeon = observer(() => {
                 </Button>
                 <div className="w-10 text-center">{playerStore.level}</div>
                 <Button
+                  className="w-10"
                   onClick={() => playerStore.setLevel(playerStore.level + 1)}
                 >
                   &gt;
@@ -83,7 +95,7 @@ const Dungeon = observer(() => {
               </div>
               <Button
                 onClick={() => playerStore.startDungeon()}
-                className="h-10 w-full"
+                className="w-full h-16"
               >
                 Start dungeon
               </Button>

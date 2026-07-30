@@ -80,6 +80,12 @@ class PlayerStore {
     };
   }
 
+  endDungeon() {
+    if (this.dungeon) {
+      this.dungeon.endedAt = Date.now();
+    }
+  }
+
   discardDungeon() {
     if (!this.dungeon) {
       return;
@@ -201,7 +207,7 @@ class PlayerStore {
       this.player.damageTaken >= this.player.resolvedStats.hp ||
       this.inventory.length >= this.inventorySize
     ) {
-      this.dungeon.endedAt = Date.now();
+      this.endDungeon();
     }
   };
 }

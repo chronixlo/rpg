@@ -16,7 +16,7 @@ const Button: React.FC<Props> = ({
     <button
       onClick={onClick}
       className={cls([
-        "border-2 border-amber-700 text-amber-700 px-1 rounded-sm",
+        "border-2 border-amber-700 text-amber-700 px-1 rounded-sm h-10",
         type === "default" && "bg-amber-700 text-white",
         className,
       ])}
