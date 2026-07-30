@@ -31,6 +31,12 @@ const ItemDialog: React.FC<Props> = observer(
             )}
 
             <div className="flex justify-end gap-2">
+              <Button onClick={onClose} type="outline">
+                Close
+              </Button>
+
+              <span className="flex-1"></span>
+
               {onEquip && EQUIPMENT_TYPES[item.type as EquipmentType] && (
                 <Button
                   onClick={() => {
@@ -52,10 +58,6 @@ const ItemDialog: React.FC<Props> = observer(
                   Salvage
                 </Button>
               )}
-
-              <Button onClick={onClose} type="outline">
-                Close
-              </Button>
             </div>
           </div>
         </div>
