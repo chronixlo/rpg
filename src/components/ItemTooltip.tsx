@@ -12,11 +12,11 @@ const ItemTooltip: React.FC<Props> = ({ item }) => {
         <ItemSquare item={item} onClick={() => {}} />
       </div>
       <div className="flex-1">
-        <div className="flex justify-between">
+        <div className="flex justify-between gap-2">
           <span style={{ color: RARITY_COLORS[item.rarity] }}>{item.name}</span>
           <span>{item.type}</span>
         </div>
-        <div className="flex gap-10 flex-wrap">
+        <div className="flex gap-x-10 flex-wrap">
           {item.stats.map((stat, idx) => (
             <span key={idx}>
               {STAT_LABELS[stat.type]}: {stat.value > 0 && "+"}

@@ -24,10 +24,10 @@ const ItemDialog: React.FC<Props> = observer(
             <ItemTooltip item={item} />
 
             {equippedItem && (
-              <>
+              <div className="mt-4">
                 Equipped
                 <ItemTooltip item={equippedItem} />
-              </>
+              </div>
             )}
 
             <div className="flex justify-end gap-2">
